@@ -7,6 +7,8 @@ from selenium.webdriver.support import expected_conditions as EC
 def click_on_search(context):
     # Use WebDriverWait to wait for the element to be visible and clickable
     search_button = WebDriverWait(context.driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, '//span[@class="inline-menu__link-text"][text()="Search"]'))
+        EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Search')]")) #//span[@class="inline-menu__link-text"][text()="Search"]
     )
+    print("before click")
     search_button.click()
+    print("After click")

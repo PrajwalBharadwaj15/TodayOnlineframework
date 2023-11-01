@@ -19,4 +19,3 @@ def click_minute_card(context):
 
 
 
-
