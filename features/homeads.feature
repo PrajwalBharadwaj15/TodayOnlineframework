@@ -4,6 +4,7 @@ Feature: LB and IMU ads functionality
     Given Launch chrome browser
     When Open home page
 
-  Scenario: Find both type of ads 
+  Scenario: Find three type of ads 
    When I click on LB ads in Home page 
    When I click on IMU ads in Home page 
+   When I click on outbrain ads in Home page

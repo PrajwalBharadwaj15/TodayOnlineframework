@@ -13,3 +13,5 @@ def launch_browser(context):
 def open_home_page(context):
     # Navigate to the URL of your home page.
     context.driver.get('https://www.todayonline.com/')  # Replace with the actual URL.
+    context.driver.maximize_window()
+    
