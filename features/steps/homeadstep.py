@@ -37,7 +37,7 @@ def click_imu_ads(context):
  def click_outbrain_ads(context):
   context.driver.execute_script("window.scrollTo(0,10500);")
   try:
-     outbrain_ad = WebDriverWait(context.driver, 3).until(EC.element_to_be_clickable((By.XPATH, "//span[@class='ob-unit ob-rec-image-container']/*position()=1")))
+     outbrain_ad = WebDriverWait(context.driver, 3).until(EC.element_to_be_clickable((By.XPATH, "(//span[@class='ob-unit ob-rec-image-container'])[1]")))#use [i] to intereact with specific position
      outbrain_ad.click()   
   except Exception as e:
      raise AssertionError('outbrain ad not found or not visible: {}'.format(e))
