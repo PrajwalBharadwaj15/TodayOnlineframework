@@ -22,4 +22,16 @@ class elementHandler:
     def fn_scrolltoviewbtn(context):
         scroll = context.execute_script("window.scrollTo(0,4500);")
         return scroll
+    
+    #to take an element in a list of elements,grab the text and interact with case insensitivity 
+    def verify_text_inlist(ele_list, str_value):
+        try:
+            for element in ele_list:
+                str_txt = element.text
+                if str_value.lower() in str_txt.lower():
+                 return True 
+        except Exception as e:
+         pass
+        return False       
+                
         
