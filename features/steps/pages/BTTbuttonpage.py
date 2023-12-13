@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from behave import *
 
-@when(u'I click on the first article on section page')
+
 def click_first_article(context):
     try:
         
@@ -15,7 +15,7 @@ def click_first_article(context):
     except Exception as e:
         raise AssertionError('First article not found or not visible: {}'.format(e))
     
-@then(u'I should click on BTT button in article detail page')
+
 def click_on_btt(context):
     context.driver.execute_script("window.scrollTo(0,5000);")
     try:
