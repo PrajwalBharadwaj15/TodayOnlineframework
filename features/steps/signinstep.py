@@ -1,7 +1,7 @@
 from behave import * 
 from pages.signinpage import find_signin_link,enter_email_and_password,click_signin_btn
 
-@then('Click on Signin link')
+@when('Click on Signin link')
 def sign_in_click(context):
   find_signin_link(context)
 
