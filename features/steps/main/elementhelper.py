@@ -1,50 +1,49 @@
 from selenium.common.exceptions import NoSuchElementException
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
-<<<<<<< HEAD:features/main/elementhelper.py
+class ElementHelper:
+    def __init__(self):
+        self.bln_status = False
+        self.driver = None
 
-class elementHandler:
-
-    def fn_is_element_present(context, elem):
+    def is_selected(self, elem):
         try:
-            return elem is not None and elem.is_displayed()
-        except NoSuchElementException:
-            return False
-        
-    def fn_click(context, elem):
-=======
-class elementhelper:
-    def fn_click(self, context, elem):
->>>>>>> 376537453ace8bc9da3a80ab3c8c04e5141819a6:features/steps/main/elementhelper.py
-        bln_status = True
-        try:
-            if self.fn_is_element_present(elem):
-                context.elem.click()
-            else:
-                raise NoSuchElementException("Element Not Present")
+            self.bln_status = elem.is_selected()
         except Exception as e:
-            bln_status = False
-        return bln_status
+            self.bln_status = False
+        return self.bln_status
 
-<<<<<<< HEAD:features/main/elementhelper.py
-    
-=======
-    def fn_is_element_present(self, elem):
+    def fn_is_selected(self, loc_strategy, loc_value):
+        loc = (loc_strategy, loc_value)
         try:
-            return elem is not None and elem.is_displayed()
+            element = self.driver.find_element(*loc)
+            self.bln_status = element.is_selected()
         except NoSuchElementException:
-            return False
->>>>>>> 376537453ace8bc9da3a80ab3c8c04e5141819a6:features/steps/main/elementhelper.py
-    
-    def fn_scroll_to_view_btn(self, context):
-        scroll = context.execute_script("window.scrollTo(0,4500);")
-        return scroll
-    
-    def verify_text_in_list(self, ele_list, str_value):
+            self.bln_status = False
+        return self.bln_status
+
+    def is_enabled(self, elem):
         try:
-            for element in ele_list:
-                str_txt = element.text
-                if str_value.lower() in str_txt.lower():
-                    return True 
+            self.bln_status = elem.is_enabled()
         except Exception as e:
-            pass
-        return False       
+            self.bln_status = False
+        return self.bln_status
+
+    def fn_is_enabled(self, loc_strategy, loc_value):
+        loc = (loc_strategy, loc_value)
+        try:
+            element = self.driver.find_element(*loc)
+            self.bln_status = element.is_enabled()
+        except NoSuchElementException:
+            self.bln_status = False
+        return self.bln_status
+
+    def fn_is_element_present(self, loc_strategy, loc_value):
+        loc = (loc_strategy, loc_value)
+        try:
+            elements = self.driver.find_elements(*loc)
+            self.bln_status = len(elements) > 0
+        except NoSuchElementException:
+            self.bln_status = False
+        return self.bln_status
