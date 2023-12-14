@@ -1,8 +1,13 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from main.elementhelper import ElementHelper
+from main.javascripthelper import Javascripthelper
+
 
 class TodayWeb_BookmarkAndSharePage:
+    js_helper = Javascripthelper()
+    ele_helper = ElementHelper()
     def __init__(self, driver):
         self.driver = driver
         self.init_elements()
@@ -24,50 +29,51 @@ class TodayWeb_BookmarkAndSharePage:
         self.shareHomePage = (By.XPATH, "//a[contains(@class,'share')]")
 
     def click_on_bookmark_icon_anonymous_user(self):
-        self.action.javaScriptHelper.fnJSClick(self.bookmarkIcon_anonymousUser)
+        self.js_helper.fn_jsclick(self.bookmarkIcon_anonymousUser)
 
     def click_on_bookmark_icon_logged_in_user(self):
-        self.action.javaScriptHelper.fnJSClick(self.bookmarkIcon_LoggedInUser)
+        self.js_helper.fn_jsclick(self.bookmarkIcon_LoggedInUser)
 
     def click_on_unbookmark_option(self):
         import time
         time.sleep(4)
-        self.action.javaScriptHelper.fnJSClick(self.bookmarkIcon_LoggedInUser)
+        self.js_helper.fn_jsclick(self.bookmarkIcon_LoggedInUser)
 
     def validate_bookmark_message(self):
         import time
-        time.sleep(2)
-        self.action.waitHelper.waitFor(self.bookmarkMessage)
-        msg = self.action.elementHelper.fnGetText(self.bookmarkMessage)
+        time.sleep(4)
+        msg = self.ele_helper.get_text(self.bookmarkMessage)
         print(msg)
         return msg
 
     def click_on_share_icon(self):
-        self.action.javaScriptHelper.fnJSClick(self.shareIcon)
+        self.js_helper.fn_jsclick(self.shareIcon)
 
     def validate_copy_link_button(self):
-        self.action.waitHelper.waitFor(self.shareNewsPopUp)
+        import time
+        time.sleep(5)
         copy_options = False
-        bln1 = self.action.elementHelper.fnIsElementDisplayed(self.copyLinkButton)
-        bln2 = self.action.elementHelper.fnIsElementDisplayed(self.copyLinktext)
+        bln1 = self.ele_helper.is_element_displayed_by(self.copyLinkButton)
+        bln2 = self.ele_helper.is_element_displayed_by(self.copyLinktext)
 
         if bln1 and bln2:
             copy_options = True
         return copy_options
 
     def validate_share_via_social_platform_icons(self):
-        self.action.waitHelper.waitFor(self.shareNewsPopUp)
+        import time
+        time.sleep(5)
         share_links = False
-        bln1 = self.action.elementHelper.fnIsElementDisplayed(self.whatsappLink)
-        bln2 = self.action.elementHelper.fnIsElementDisplayed(self.facebookLink)
-        bln3 = self.action.elementHelper.fnIsElementDisplayed(self.twitterLink)
-        bln4 = self.action.elementHelper.fnIsElementDisplayed(self.emailLink)
-        bln5 = self.action.elementHelper.fnIsElementDisplayed(self.linkedINLink)
+        bln1 = self.ele_helper.is_element_displayed_by(self.whatsappLink)
+        bln2 = self.ele_helper.is_element_displayed_by(self.facebookLink)
+        bln3 = self.ele_helper.is_element_displayed_by(self.twitterLink)
+        bln4 = self.ele_helper.is_element_displayed_by(self.emailLink)
+        bln5 = self.ele_helper.is_element_displayed_by(self.linkedINLink)
 
         if bln1 and bln2 and bln3 and bln4 and bln5:
             share_links = True
         return share_links
 
     def validate_close_pop_up_button(self):
-        self.action.elementHelper.fnIsElementDisplayed(self.closePopUpButton)
-        self.action.elementHelper.fnClick(self.closePopUpButton)
+        self.ele_helper.is_element_displayed_by(self.closePopUpButton)
+        self.js_helper.fn_jsclick(self.closePopUpButton)

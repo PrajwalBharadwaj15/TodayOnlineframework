@@ -3,67 +3,76 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 class ElementHelper:
-    def __init__(self):
-        self.bln_status = False
-        self.driver = None
+    def __init__(self, driver):
+        self.driver = driver
 
     def is_selected(self, elem):
         try:
-            self.bln_status = elem.is_selected()
+            return elem.is_selected()
         except Exception as e:
-            self.bln_status = False
-        return self.bln_status
+            return False
 
     def fn_is_selected(self, loc_strategy, loc_value):
         loc = (loc_strategy, loc_value)
         try:
             element = self.driver.find_element(*loc)
-            self.bln_status = element.is_selected()
+            return element.is_selected()
         except NoSuchElementException:
-            self.bln_status = False
-        return self.bln_status
+            return False
 
     def is_enabled(self, elem):
         try:
-            self.bln_status = elem.is_enabled()
+            return elem.is_enabled()
         except Exception as e:
-            self.bln_status = False
-        return self.bln_status
+            return False
 
     def fn_is_enabled(self, loc_strategy, loc_value):
         loc = (loc_strategy, loc_value)
         try:
             element = self.driver.find_element(*loc)
-            self.bln_status = element.is_enabled()
+            return element.is_enabled()
         except NoSuchElementException:
-            self.bln_status = False
-        return self.bln_status
+            return False
 
     def fn_is_element_present(self, loc_strategy, loc_value):
         loc = (loc_strategy, loc_value)
         try:
             elements = self.driver.find_elements(*loc)
-            self.bln_status = len(elements) > 0
+            return len(elements) > 0
         except NoSuchElementException:
-            self.bln_status = False
-        return self.bln_status
-    
-    
+            return False
+
     def is_element_present(self, elem):
         try:
             return elem.is_displayed()
         except NoSuchElementException:
             return False
 
-    def get_text(self, elem):
-        str_text = ""
+    def is_element_displayed(self, elem):
         try:
             if self.is_element_present(elem):
-                str_text = elem.text
+                return elem.is_displayed()
             else:
                 raise NoSuchElementException("Element Not Present")
         except Exception as e:
-            pass
-        return str_text
+            return False
+
+    def is_element_displayed_by(self, loc):
+        try:
+            if self.fn_is_element_present(*loc):
+                return self.driver.find_element(*loc).is_displayed()
+            else:
+                raise NoSuchElementException("Element Not Present")
+        except Exception as e:
+            return False
+
+    def get_text(self, elem):
+        try:
+            if self.is_element_present(elem):
+                return elem.text
+            else:
+                raise NoSuchElementException("Element Not Present")
+        except Exception as e:
+            return ""
      
         
