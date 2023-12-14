@@ -47,3 +47,23 @@ class ElementHelper:
         except NoSuchElementException:
             self.bln_status = False
         return self.bln_status
+    
+    
+    def is_element_present(self, elem):
+        try:
+            return elem.is_displayed()
+        except NoSuchElementException:
+            return False
+
+    def get_text(self, elem):
+        str_text = ""
+        try:
+            if self.is_element_present(elem):
+                str_text = elem.text
+            else:
+                raise NoSuchElementException("Element Not Present")
+        except Exception as e:
+            pass
+        return str_text
+     
+        
