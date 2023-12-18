@@ -1,21 +1,25 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium import webdriver
+
+
 from selenium.webdriver.support import expected_conditions as EC
 from main.elementhelper import ElementHelper
 from main.javascripthelper import Javascripthelper
 
 
 class TodayWeb_BookmarkAndSharePage:
-    js_helper = Javascripthelper()
-    ele_helper = ElementHelper()
+    driver = webdriver.Chrome()
+    js_helper = Javascripthelper(driver)
+    ele_helper = ElementHelper(driver)
     def __init__(self, driver):
         self.driver = driver
         self.init_elements()
 
     def init_elements(self):
-        self.bookmarkIcon_anonymousUser = (By.XPATH, "//a[@class='link bookmark-link-anonymous use-ajax']")
-        self.shareIcon = (By.XPATH, "//a[@class='link trigger-popup trigger-popup--share']")
-        self.bookmarkIcon_LoggedInUser = (By.XPATH, "//a[contains(@class,'link bookmark-link')]")
+        self.bookmarkIcon_anonymousUser = (By.XPATH, "//a[@class='link bookmark-link-anonymous use-ajax']/*[position()=1]")
+        self.shareIcon = (By.XPATH, "//a[@class='link trigger-popup trigger-popup--share']/*[position()=1]")
+        self.bookmarkIcon_LoggedInUser = (By.XPATH, "//a[contains(@class,'link bookmark-link')]/*[position()=1]")
         self.bookmarkMessage = (By.XPATH, "//div[contains(@class,'message-popup__content')]//span")
         self.copyLinkButton = (By.XPATH, "//div[@class='copy-link']//button")
         self.copyLinktext = (By.XPATH, "//div[@class='copy-link']//input")

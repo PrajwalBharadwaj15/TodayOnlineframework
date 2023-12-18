@@ -1,10 +1,10 @@
 
-from elementhelper import ElementHelper 
+from main.elementhelper import ElementHelper 
 from selenium.common.exceptions import NoSuchElementException
 
 class Javascripthelper():
-    def __init__(self):
-        self.element_helper = ElementHelper()
+    def __init__(self,driver):
+        self.element_helper = ElementHelper(driver)
 
     def fnjsclick(self, elem):
         bln_status = True 
@@ -21,7 +21,7 @@ class Javascripthelper():
             if self.element_helper.fn_is_element_present(loc):
                 elem = self.driver.find_element(*loc)
                 javascript = "arguments[0].click();"      
-                self.driver.execute_script(javascript, elem)
+                self.driver.execute_script(elem,javascript)
             else:
                 raise NoSuchElementException("Element Not Present")
         except Exception as e:
@@ -33,7 +33,7 @@ class Javascripthelper():
             js_executor = driver
             elem = driver.find_element(*loc)
             javascript = "arguments[0].scrollIntoView(true);"
-            js_executor.execute_script(javascript, elem)
+            js_executor.execute_script(elem,javascript)
         except Exception as e:
             pass
 
@@ -41,7 +41,7 @@ class Javascripthelper():
         try:
             js_executor = driver
             javascript = "arguments[0].scrollIntoView(true);"
-            js_executor.execute_script(javascript, elem)
+            js_executor.execute_script(elem,javascript)
         except Exception as e:
             pass
 
