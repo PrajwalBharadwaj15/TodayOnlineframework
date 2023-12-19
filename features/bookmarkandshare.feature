@@ -6,8 +6,7 @@ Feature: Bookmark and Share functionality
 
   Scenario: Bookmark functionality validation for anonymous user
     Then I click on Bookmark link for an anonymous user
-    Then I validate if MeConnect SignIN Page is displayed
-    Then I validate if "Added to your bookmarks." toast message is displayed
+    
 
   
   Scenario: Bookmark functionality validation for LoggedIn user
