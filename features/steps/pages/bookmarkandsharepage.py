@@ -17,7 +17,7 @@ class TodayWeb_BookmarkAndSharePage:
         self.bookmarkIcon_anonymousUser = (By.XPATH, "//a[@class='link bookmark-link-anonymous use-ajax']/*[position()=1]")
         self.shareIcon = (By.XPATH, "//a[@class='link trigger-popup trigger-popup--share']/*[position()=1]")
         self.bookmarkIcon_LoggedInUser = (By.XPATH, "//a[contains(@class,'link bookmark-link')]/*[position()=1]")
-        self.bookmarkMessage = (By.XPATH, "//div[contains(@class,'message-popup__content')]//span")
+        self.bookmarkMessage = (By.XPATH, "//div[@class='message-popup__content']//span")
         self.copyLinkButton = (By.XPATH, "//div[@class='copy-link']//button")
         self.copyLinktext = (By.XPATH, "//div[@class='copy-link']//input")
         self.shareNewsPopUp = (By.XPATH, "//div[contains(@class,'popup__dialog--share-link')]")
