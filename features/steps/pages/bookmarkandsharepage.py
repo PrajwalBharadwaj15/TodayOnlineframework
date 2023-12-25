@@ -31,7 +31,7 @@ class TodayWeb_BookmarkAndSharePage:
 
     def click_on_bookmark_icon_anonymous_user(self):
         try:
-            bookmark_icon = WebDriverWait(self.driver, 10).until(
+            bookmark_icon = WebDriverWait(self.driver, 15).until(
                 EC.element_to_be_clickable(self.bookmarkIcon_anonymousUser)
             )
             bookmark_icon.click()
@@ -42,13 +42,22 @@ class TodayWeb_BookmarkAndSharePage:
 
     def click_on_bookmark_icon_logged_in_user(self):
         try:
-            self.js_helper.fn_jsclick(self.bookmarkIcon_LoggedInUser)
+           self.js_helper.fn_jsclick(self.bookmarkIcon_LoggedInUser)
+            # Wait for the bookmark message after clicking the bookmark icon
+           bookmark_message = WebDriverWait(self.driver, 15).until(
+                EC.visibility_of_element_located(self.bookmarkMessage)
+            )
+           message_text = bookmark_message.text
+           print(f"Bookmark message after clicking: '{message_text}'")
         except NoSuchElementException as e:
             print(f"Error clicking bookmark icon for logged-in user: {e}")
 
     def click_on_unbookmark_option(self):
         try:
             self.js_helper.fn_jsclick(self.bookmarkIcon_LoggedInUser)
+            bookmark_message = self.wait.until(EC.visibility_of_element_located(self.bookmarkMessage))
+            message_text = bookmark_message.text
+            print(f"Bookmark message after clicking: '{message_text}'")
         except NoSuchElementException as e:
             print(f"Error clicking bookmark icon for unbookmark: {e}")
 
